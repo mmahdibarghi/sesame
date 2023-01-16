@@ -9,6 +9,8 @@ import json
 
 
 PlatesList = ["786P0", "DEF456", "GHI789", "JKL012", "MNO345", "PQR678", "STU901", "VWX234", "YZA567", "BCD890"]
+camera = PiCamera() #initialize camera
+
 
 
 
@@ -16,8 +18,7 @@ PlatesList = ["786P0", "DEF456", "GHI789", "JKL012", "MNO345", "PQR678", "STU901
 
 
 def takePhoto():
-    camera = PiCamera()
-    # time.sleep(2)
+    time.sleep(2)
     camera.capture("./Pictures/img.jpg")
     original = r"./Pictures/img.jpg"
     target = "./history/img_" + str(time.time()) + ".jpg"
@@ -28,14 +29,19 @@ def takePhoto():
 
 
 def recognizePlate():
-    alpr = Alpr("us", "/etc/openalpr/openalpr.conf", "/usr/share/openalpr/runtime_data/")
+    alpr = Alpr("eu", "/etc/openalpr/openalpr.conf", "/usr/share/openalpr/runtime_data/")
     if not alpr.is_loaded():
         print("Error loading OpenALPR")
         return -1
-    results = alpr.recognize_file("./Pictures/lp.jpg")
+    results = alpr.recognize_file("./Pictures/img.jpg")
     resultJson = json.dumps(results, indent=4)
-    result = json.loads(resultJson)
-    return result["results"][0]["plate"]
+    # print(resultJson) #comment this line if you don't want to see the json
+    if len(results["results"]) == 0:
+        print("No results")
+        return -1
+    else:
+        result = json.loads(resultJson)
+        return result["results"][0]["plate"]
 
     
 
