@@ -14,24 +14,17 @@ def OpenGate():
     gate_state = "Open"
     print("Open Gate")
     p.start(0)             #generate PWM signal with 0% duty cycle
-    # print(" Welcome!")
     p.ChangeDutyCycle(11)
     time.sleep(1)
     p.ChangeDutyCycle(0)
-    # time.sleep(1)
-    # p.stop() 
-    # print(" hello!")
+    
 
 def CloseGate():
     print("close Gate")
     global gate_state
     gate_state = "Closed"
-    p.start(0)                              #generate PWM signal with 0% duty cycle
+    p.start(0)              #generate PWM signal with 0% duty cycle
     p.ChangeDutyCycle(5)
     time.sleep(1)
     p.ChangeDutyCycle(0)
-    # time.sleep(1)
-    # p.stop() 
-    # print(" bye!")
   
-
