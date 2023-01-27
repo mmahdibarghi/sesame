@@ -8,14 +8,8 @@ import json
 import requests
 
 
-# PlatesList = ["786P0", "DEF456", "GHI789", "JKL012", "MNO345", "PQR678", "STU901", "VWX234", "YZA567", "BCD890"]
 camera = PiCamera() #initialize camera
 serverURL = 'http://192.168.157.23:4500/api/check'
-
-hardCodePlate = 0
-
-
-
 
 
 def takePhoto():
@@ -64,19 +58,11 @@ def validatePlate(plate):
     
 
 def CameraRecognized():
-    global hardCodePlate
     plate = ""
     for i in range(3):
         takePhoto()
         plate = recognizePlate()
-        # if hardCodePlate == 0:
-        #     plate = "ABCDK123"
-        # elif hardCodePlate == 1:
-        #     plate = "ABCDK123"
-        # else:
-        #     plate = "ABCDK123"
         print(plate)
-        hardCodePlate += 1
         result = validatePlate(plate)
         if result == True:
             break
