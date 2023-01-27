@@ -56,7 +56,6 @@ def networkCommandChecker():
         response = urllib.request.urlopen(lockCheckerURl)
         data = json.loads(response.read().decode('utf-8'))
         status = data['with'][0]['content']['manual']
-        # print('Gate Status = ', status)
         if mode == 'Automatic':
             if status == 'fo32FNLV64KL913VRN16FELn':
                 networkLock = 1 
@@ -94,7 +93,6 @@ def button_pressed_callback(channel):
                 time.sleep(2)
                 lcd.clear()
             elif gate_state == "Closed":
-                # print("automate shodam!")
                 mode = "Automatic"
                 lcd.clear()
                 lcd.write_string(" Atomatic Mode!")
@@ -129,11 +127,11 @@ while 1:
 
             previous_state = "Idle"
             print("state is:  "+current_state)
-            if CheckUlt1() and CheckUlt2() == 0:
+            if CheckUlt1():
                 current_state = "CheckCameraIn"
                 continue
             
-            elif CheckUlt2() and CheckUlt1() == 0:
+            elif CheckUlt2():
                 current_state = "CheckCameraOut"
             
 
@@ -151,9 +149,6 @@ while 1:
                 innerPlates.append(plate)
                 lcd.clear()
                 lcd.write_string("Plate: " + plate)
-                # time.sleep(0.5)
-                # lcd.clear()
-                # lcd.write_string(plate)
                 time.sleep(2)
                 lcd.clear()
                 current_state = "OpenGateIn"
@@ -162,7 +157,6 @@ while 1:
                 lcd.write_string("   not valid!")
                 time.sleep(2)
                 lcd.clear()
-                time.sleep(3)
                 current_state = "Idle"
             
             GPIO.output(GPIO_LED_IN,False)
@@ -172,10 +166,7 @@ while 1:
             previous_state = "OpenGateIn"
             print("state is:  "+current_state)
 
-            # if CheckUlt2():
-            #     current_state = "PassIn"
-            if CheckUlt1() == 0: 
-            # and CheckUlt2() == 1:
+            if CheckUlt1() == 0 and CheckUlt2() == 1:
                 current_state = "PassIn"
 
 
@@ -183,11 +174,9 @@ while 1:
             previous_state = "PassIn"
             print("state is:  "+current_state)
             
-            # if CheckUlt1() == 0 and CheckUlt2() == 0:
-            #     current_state = "CloseGate"
-            # if CheckUlt2() == 0:
-            time.sleep(2)
-            current_state = "CloseGate"
+            if CheckUlt1() == 0 and CheckUlt2() == 0:
+                 current_state = "CloseGate"
+
 
         elif current_state == "CloseGate":
             previous_state = "CloseGate"
@@ -213,9 +202,6 @@ while 1:
                     innerPlates.remove(plate)
                 lcd.clear()
                 lcd.write_string("Plate: " + plate)
-                # time.sleep(0.5)
-                # lcd.clear()
-                # lcd.write_string(plate)
                 time.sleep(2)
                 lcd.clear()
                 current_state = "OpenGateOut"
@@ -224,7 +210,6 @@ while 1:
                 lcd.write_string("   not valid!")
                 time.sleep(2)
                 lcd.clear()
-                time.sleep(3)
                 current_state = "Idle"
 
             GPIO.output(GPIO_LED_OUT,False)
@@ -233,23 +218,16 @@ while 1:
             previous_state = "OpenGateOut"
             print("state is:  "+current_state)
             
-            # if CheckUlt1():
-            #     current_state = "PassOut"
-            if CheckUlt2() == 0:
-            # CheckUlt1() == 1 and 
+            if CheckUlt1() == 1 and CheckUlt2() == 0:
                 current_state = "PassOut"
 
         elif current_state == "PassOut":
             previous_state = "PassOut"
             print("state is:  "+current_state)
 
-            # if CheckUlt1() == 0 and CheckUlt2() == 0:
-            #     current_state = "CloseGate"
-            # if CheckUlt1() == 0:
-            time.sleep(2)
-            current_state = "CloseGate"
-
-        
+            if CheckUlt1() == 0 and CheckUlt2() == 0:
+                current_state = "CloseGate"
+           
                 
         else:
             print("Error")
