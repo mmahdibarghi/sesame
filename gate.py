@@ -2,9 +2,9 @@ import RPi.GPIO as IO
 import time    
 
 IO.setwarnings(False)           #do not show any warnings
-IO.setmode (IO.BCM)         #we are programming the GPIO by BCM pin numbers. (PIN32 as ‘GPIO12’)
+IO.setmode (IO.BCM)        
 IO.setup(12,IO.OUT)           # initialize GPIO12 as an output.
-p = IO.PWM(12,50)          #GPIO12 as PWM output, with 100Hz frequency
+p = IO.PWM(12,50)          #GPIO12 as PWM output, with 50Hz frequency
 
 
 
