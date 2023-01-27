@@ -26,29 +26,7 @@ def Manual():
 
     TimeElapsed = StopTime - StartTime
 
-    if TimeElapsed >= 1:
+    if TimeElapsed >= 3:
         return True
     else: 
         return False
-
-# led = 0
-# GPIO.output(GPIO_LED, False)
-
-# while 1:
-#     if GPIO.input(GPIO_Button) == 1:
-#         StartTime = time.time()
-
-#         while GPIO.input(GPIO_Button) == 1:()
-
-#         StopTime = time.time()
-
-#         TimeElapsed = StopTime - StartTime
-
-#         if TimeElapsed >= 2:
-#             if led == 1:
-#                 GPIO.output(GPIO_LED, False)
-#                 led = 0
-#             else : 
-#                 GPIO.output(GPIO_LED, True)
-#                 led = 1
-
