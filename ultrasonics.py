@@ -4,7 +4,6 @@ import time
  
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
-GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)           #do not show any warnings
 
 
