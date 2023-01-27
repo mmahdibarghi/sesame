@@ -8,11 +8,9 @@ GPIO.setwarnings(False)           #do not show any warnings
 
 #set GPIO Pins
 GPIO_Button = 17
-# GPIO_LED = 23
 
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_Button, GPIO.IN)
-# GPIO.setup(GPIO_LED, GPIO.OUT)
 
 def Manual():
     print("press key!")
