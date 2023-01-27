@@ -4,12 +4,13 @@ import time
  
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)           #do not show any warnings
 
 
 #set GPIO Pins
-GPIO_TRIGGER_IN = 24
-GPIO_ECHO_IN = 23
+GPIO_TRIGGER_IN = 15
+GPIO_ECHO_IN = 14
 GPIO_TRIGGER_OUT = 21
 GPIO_ECHO_OUT = 20
  
@@ -19,9 +20,6 @@ GPIO.setup(GPIO_ECHO_IN, GPIO.IN)
 GPIO.setup(GPIO_TRIGGER_OUT, GPIO.OUT)
 GPIO.setup(GPIO_ECHO_OUT, GPIO.IN)
  
-LED_PIN = 7
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
 
 def distanceOut():
     # set Trigger to HIGH
@@ -78,7 +76,7 @@ def distanceIn():
     return distance
 
 def switch(dist):
-    if 0<dist<100 :
+    if 0<dist<110:
        return True
     else:
         return False
@@ -86,20 +84,20 @@ def switch(dist):
 def CheckUlt1():
 
     distanceVectorIn = []
-    for i in range(10):
+    for i in range(5):
           distIn = distanceIn()
           distanceVectorIn.append(distIn)
-          time.sleep(0.1)
+          time.sleep(0.05)
     avgin = sum(distanceVectorIn)/len(distanceVectorIn)
     return switch(avgin)
 
 def CheckUlt2():
 
     distanceVectorOut = []
-    for i in range(10):
+    for i in range(5):
           distOut = distanceOut()
           distanceVectorOut.append(distOut)
-          time.sleep(0.1)
+          time.sleep(0.05)
     avgout = sum(distanceVectorOut)/len(distanceVectorOut)
     return switch(avgout)
 

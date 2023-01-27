@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  client:
+    build: .
+    image: 'aicup-dash'
+    container_name: 'aicup-dash'
+    volumes:
+      - /var/www/dash.aicup.iut.ac.ir/public:/app/build
